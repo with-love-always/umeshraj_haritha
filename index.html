@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engagement Ceremony - E-Invitation</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mukta+Malar:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --color-primary: #881337; /* Rose 900 */
+      --color-secondary: #fef08a; /* Yellow 200 / Gold */
+    }
+
+    body {
+      font-family: 'Mukta Malar', sans-serif;
+      background-color: #fdfbf7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .font-serif {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .font-cursive {
+      font-family: 'Great Vibes', cursive;
+    }
+    
+    .text-gold {
+      background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .bg-gold {
+      background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    }
+
+    .pattern-bg {
+      background-color: #881337;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239f1239' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    @keyframes confetti {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    .animate-confetti {
+      animation-name: confetti;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+    }
+
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0% { transform: translate(0, 0px); }
+      50% { transform: translate(0, 15px); }
+      100% { transform: translate(0, -0px); }
+    }
+
+    /* Scroll Reveal Styles */
+    .reveal {
+      transition-property: all;
+      transition-duration: 1000ms;
+      transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+    
+    .reveal-up { opacity: 0; transform: translateY(3rem); }
+    .reveal-down { opacity: 0; transform: translateY(-3rem); }
+    .reveal-left { opacity: 0; transform: translateX(3rem); }
+    .reveal-right { opacity: 0; transform: translateX(-3rem); }
+    .reveal-scale { opacity: 0; transform: scale(0.9); }
+    
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translate(0) scale(1);
+    }
+  </style>
+</head>
+<body class="selection:bg-rose-900 selection:text-white w-full min-h-screen relative">
+  <!-- Confetti Container -->
+  <div id="confetti-container" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
+
+  <!-- Auto Scroll Floating Button -->
+  <button onclick="toggleAutoScroll()" class="fixed bottom-6 right-6 z-50 bg-rose-700/90 hover:bg-rose-800 text-white backdrop-blur-sm px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 transition-all border border-rose-400">
+    <i id="auto-scroll-icon" data-lucide="play-circle" width="20" height="20"></i>
+    <span id="auto-scroll-text" class="text-sm font-medium tracking-wider uppercase">Auto Scroll</span>
+  </button>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden pattern-bg pt-10 pb-20">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-rose-950/90 z-0 pointer-events-none"></div>
+    
+    <!-- Decorative corner elements -->
+    <div class="absolute top-4 left-4 w-16 h-16 md:w-32 md:h-32 border-t-2 border-l-2 border-yellow-500/50 rounded-tl-3xl z-10"></div>
+    <div class="absolute top-4 right-4 w-16 h-16 md:w-32 md:h-32 border-t-2 border-r-2 border-yellow-500/50 rounded-tr-3xl z-10"></div>
+    <div class="absolute bottom-4 left-4 w-16 h-16 md:w-32 md:h-32 border-b-2 border-l-2 border-yellow-500/50 rounded-bl-3xl z-10"></div>
+    <div class="absolute bottom-4 right-4 w-16 h-16 md:w-32 md:h-32 border-b-2 border-r-2 border-yellow-500/50 rounded-br-3xl z-10"></div>
+
+    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
+      <div class="reveal reveal-down">
+        <div class="mb-4">
+          <span id="hero-gods-name" class="text-yellow-400 font-medium tracking-widest uppercase text-xs md:text-sm letter-spacing-2">
+            <!-- Injected dynamically -->
+          </span>
+        </div>
+        <h2 id="hero-ceremony" class="text-yellow-500 font-serif text-xl md:text-2xl mb-8 tracking-widest uppercase">
+          <!-- Injected dynamically -->
+        </h2>
+      </div>
+
+      <div class="reveal reveal-scale" style="transition-delay: 200ms;">
+        <div class="relative py-8 md:py-12">
+          <div class="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+            <i data-lucide="heart" width="200" height="200" class="text-yellow-400 floating" fill="currentColor"></i>
+          </div>
+          <h1 id="hero-name-1" class="text-6xl md:text-8xl lg:text-9xl font-cursive text-gold drop-shadow-lg leading-tight z-10 relative"></h1>
+          <div class="text-3xl md:text-5xl font-serif text-white my-4 italic z-10 relative">&</div>
+          <h1 id="hero-name-2" class="text-6xl md:text-8xl lg:text-9xl font-cursive text-gold drop-shadow-lg leading-tight z-10 relative"></h1>
+        </div>
+      </div>
+
+      <div class="reveal reveal-up" style="transition-delay: 400ms;">
+        <p class="mt-8 text-rose-100 text-lg md:text-xl font-light" id="hero-invite-text">
+          We invite you to share in our joy and celebrate our engagement.
+        </p>
+        <p class="text-xl md:text-2xl font-semibold text-yellow-400 mt-4">
+          09 • 07 • 2026
+        </p>
+      </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div onclick="document.getElementById('invitation-section').scrollIntoView({behavior: 'smooth'})" class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce z-10 text-yellow-400/70 cursor-pointer">
+      <span class="text-xs uppercase tracking-widest mb-2">Scroll</span>
+      <i data-lucide="heart" width="20" height="20"></i>
+    </div>
+  </section>
+
+  <!-- Invitation Message Section -->
+  <section id="invitation-section" class="py-20 px-4 bg-white relative overflow-hidden">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="reveal reveal-up">
+        <h2 id="invite-title" class="text-3xl md:text-4xl font-serif text-rose-900 mb-6"></h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-rose-900 to-transparent mx-auto mb-10"></div>
+        
+        <p id="invite-msg" class="text-lg md:text-xl text-gray-700 leading-relaxed mb-8"></p>
+        
+        <p id="invite-quote" class="text-lg text-rose-800 font-medium italic mt-6"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Couple Profiles Section -->
+  <section class="py-20 px-4 bg-rose-50/50 border-y border-rose-100">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 relative" id="profiles-container">
+        <!-- Profiles dynamically injected here by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Event Details Cards -->
+  <section class="py-20 px-4 relative">
+    <div class="max-w-4xl mx-auto">
+      <div class="reveal reveal-up text-center mb-12">
+        <h2 id="event-title" class="text-3xl md:text-4xl font-serif text-rose-900 mb-4"></h2>
+        <div class="w-24 h-1 bg-rose-200 mx-auto"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="reveal reveal-up h-full" style="transition-delay: 100ms;">
+          <div class="bg-white p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col items-center text-center h-full hover:-translate-y-2 transition-transform duration-300">
+            <div class="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mb-6 text-rose-600">
+              <i data-lucide="calendar-heart" width="32" height="32"></i>
+            </div>
+            <h3 id="date-title" class="font-serif text-xl text-gray-900 mb-2"></h3>
+            <p id="date-1" class="text-lg font-semibold text-rose-800"></p>
+            <p id="date-2" class="text-gray-600"></p>
+            <p id="date-3" class="text-sm text-gray-500 mt-2"></p>
+          </div>
+        </div>
+
+        <div class="reveal reveal-up h-full" style="transition-delay: 200ms;">
+          <div class="bg-rose-900 text-white p-8 rounded-2xl shadow-xl border border-rose-800 flex flex-col items-center text-center h-full transform scale-105 z-10 relative">
+            <div class="absolute -top-4 -right-4 w-20 h-20 opacity-20">
+               <svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 0 L55 40 L100 50 L55 60 L50 100 L45 60 L0 50 L45 40 Z" /></svg>
+            </div>
+            <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6 text-yellow-400">
+              <i data-lucide="clock" width="32" height="32"></i>
+            </div>
+            <h3 id="time-title" class="font-serif text-xl mb-2 text-yellow-400"></h3>
+            <p id="time-1" class="text-lg font-semibold"></p>
+            <p id="time-2" class="text-rose-200"></p>
+            <p id="time-3" class="text-sm text-rose-300 mt-2"></p>
+          </div>
+        </div>
+
+        <div class="reveal reveal-up h-full" style="transition-delay: 300ms;">
+          <div class="bg-white p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col items-center text-center h-full hover:-translate-y-2 transition-transform duration-300">
+            <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6 text-amber-600">
+              <i data-lucide="map-pin" width="32" height="32"></i>
+            </div>
+            <h3 id="venue-title" class="font-serif text-xl text-gray-900 mb-2"></h3>
+            <p id="venue-1" class="text-base font-semibold text-gray-800"></p>
+            <p id="venue-2" class="text-sm text-gray-600 mt-1"></p>
+            <p id="venue-3" class="text-sm text-gray-600"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="py-20 bg-gray-50 border-y border-gray-200">
+     <div class="max-w-4xl mx-auto px-4">
+        <div class="reveal reveal-up text-center mb-16">
+          <h2 id="timeline-title" class="text-3xl md:text-4xl font-serif text-rose-900 mb-4"></h2>
+          <div class="w-24 h-1 bg-rose-200 mx-auto"></div>
+        </div>
+
+        <div class="relative border-l-2 border-rose-200 ml-4 md:ml-1/2 md:left-1/2 md:-translate-x-1/2 space-y-12">
+           
+           <div class="reveal reveal-right relative pl-8 md:pl-0 md:w-1/2 md:pr-12 md:text-right md:-left-[2px]" style="transition-delay: 100ms;">
+             <div class="absolute top-0 left-[-9px] md:left-auto md:right-[-9px] w-4 h-4 rounded-full bg-rose-500 border-4 border-white shadow"></div>
+             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 inline-block w-full">
+               <div class="flex items-center gap-3 text-rose-600 mb-2 md:justify-end">
+                 <i data-lucide="users" width="20" height="20"></i>
+                 <h4 id="tl1-title" class="font-serif text-xl font-semibold"></h4>
+               </div>
+               <p id="tl1-time" class="text-rose-900 font-medium"></p>
+               <p id="tl1-desc" class="text-gray-500 text-sm mt-2"></p>
+             </div>
+           </div>
+
+           <div class="reveal reveal-left relative pl-8 md:pl-12 md:w-1/2 md:left-1/2" style="transition-delay: 200ms;">
+             <div class="absolute top-0 left-[-9px] w-4 h-4 rounded-full bg-amber-500 border-4 border-white shadow"></div>
+             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 inline-block w-full">
+               <div class="flex items-center gap-3 text-amber-600 mb-2">
+                 <i data-lucide="heart" width="20" height="20"></i>
+                 <h4 id="tl2-title" class="font-serif text-xl font-semibold"></h4>
+               </div>
+               <p id="tl2-time" class="text-rose-900 font-medium"></p>
+               <p id="tl2-desc" class="text-gray-500 text-sm mt-2"></p>
+             </div>
+           </div>
+
+           <div class="reveal reveal-right relative pl-8 md:pl-0 md:w-1/2 md:pr-12 md:text-right md:-left-[2px]" style="transition-delay: 300ms;">
+             <div class="absolute top-0 left-[-9px] md:left-auto md:right-[-9px] w-4 h-4 rounded-full bg-green-500 border-4 border-white shadow"></div>
+             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 inline-block w-full">
+               <div class="flex items-center gap-3 text-green-600 mb-2 md:justify-end">
+                 <i data-lucide="utensils" width="20" height="20"></i>
+                 <h4 id="tl3-title" class="font-serif text-xl font-semibold"></h4>
+               </div>
+               <p id="tl3-time" class="text-rose-900 font-medium"></p>
+               <p id="tl3-desc" class="text-gray-500 text-sm mt-2"></p>
+             </div>
+           </div>
+        </div>
+     </div>
+  </section>
+
+  <!-- Location Map Section -->
+  <section class="py-20 px-4 bg-white relative">
+    <div class="max-w-5xl mx-auto">
+      <div class="reveal reveal-up text-center mb-12">
+        <h2 id="loc-title" class="text-3xl md:text-4xl font-serif text-rose-900 mb-4"></h2>
+        <p id="loc-desc" class="text-gray-600"></p>
+      </div>
+
+      <div class="reveal reveal-scale h-[400px]" style="transition-delay: 200ms;">
+        <div class="bg-gray-100 rounded-3xl overflow-hidden shadow-lg border border-gray-200 relative h-full">
+          <div class="absolute inset-0 bg-slate-200 flex flex-col items-center justify-center p-6 text-center">
+             <i data-lucide="map" width="80" height="80" class="text-rose-300 mb-4"></i>
+             <h3 class="font-serif text-2xl text-slate-700 mb-2">A.S.R. Function Hall A/c</h3>
+             <p class="text-slate-500 max-w-md">
+               Ponniamman Koil Street, Sainathapuram, Vellore.
+             </p>
+             <a 
+               href="https://maps.google.com/?q=A.S.R.+Function+Hall+Sainathapuram+Vellore" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="mt-6 inline-flex items-center gap-2 bg-rose-600 hover:bg-rose-700 text-white px-6 py-3 rounded-full font-medium transition-colors shadow-md hover:shadow-lg"
+             >
+               <i data-lucide="map-pin" width="18" height="18"></i>
+               <span id="loc-btn"></span>
+             </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer / Hosts Section -->
+  <footer class="bg-rose-950 text-white pt-16 pb-8 px-4 text-center relative overflow-hidden">
+    <div class="reveal reveal-up max-w-2xl mx-auto flex flex-col items-center relative z-10">
+      <i data-lucide="heart" width="32" height="32" class="text-rose-500 mb-6" fill="currentColor"></i>
+      <h3 id="footer-welcome" class="text-xl md:text-2xl font-serif mb-6 text-yellow-400">
+        <!-- Injected -->
+      </h3>
+      
+      <div id="footer-hosts-container" class="space-y-4 text-rose-200 font-light mb-10">
+         <!-- Dynamic footer content injected here -->
+      </div>
+      
+      <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-rose-800 to-transparent my-8"></div>
+      
+      <p class="text-rose-400 text-sm">
+         <span id="footer-made"></span> <span id="footer-names" class="font-semibold text-rose-200"></span>.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- 1. Configurations & Translations ---
+
+        const i18n = {
+          en: {
+            godsNameBride: "With the blessings of Sri Angalamman & Sri Murugan",
+            godsNameGroom: "With the blessings of Sri Moliamman & Sri Murugan",
+            ceremony: "Engagement Ceremony",
+            inviteTitle: "Engagement Ceremony Invitation",
+            inviteMsg: "Dear Friends & Family,<br/><br/>By the grace of Lord Murugan, we cordially invite you to the Engagement Ceremony of our children. The auspicious event is scheduled to take place on Thursday, 09th July 2026 (Aani 25, Parabhava Varudam) between 10:30 AM and 12:00 PM.<br/><br/>We request your presence to bless the couple.",
+            quote: "\"Two souls with but a single thought, two hearts that beat as one.\"",
+            eventDetails: "Event Details",
+            dateTitle: "The Date", date1: "Thursday", date2: "09 July 2026", date3: "Aani 25, Parabhava Varudam",
+            timeTitle: "The Time", time1: "10:30 AM", time2: "to 12:00 PM", time3: "Muhurtham",
+            venueTitle: "The Venue", venue1: "A.S.R. Function Hall A/c", venue2: "Ponniamman Koil Street,", venue3: "Sainathapuram, Vellore.",
+            timelineTitle: "Event Timeline",
+            tl1Title: "Welcome & Gathering", tl1Time: "09:30 AM", tl1Desc: "Join us as we welcome our friends and family.",
+            tl2Title: "Engagement Ceremony", tl2Time: "10:30 AM - 12:00 PM", tl2Desc: "The official ring exchange and blessings.",
+            tl3Title: "Celebratory Feast", tl3Time: "12:30 PM Onwards", tl3Desc: "Please join us for a delicious traditional lunch.",
+            locTitle: "Venue Location", locDesc: "A.S.R. Function Hall A/c, Sainathapuram, Vellore", locBtn: "Get Directions on Map",
+            footerWelcome: "Awaiting your gracious presence", footerMade: "Made with love for"
+          },
+          ta: {
+            godsNameBride: "ஸ்ரீ அங்காளம்மன் துணை | ஸ்ரீ முருகன் துணை",
+            godsNameGroom: "ஸ்ரீ மோளியம்மன் துணை | ஸ்ரீ முருகன் துணை",
+            ceremony: "திருமண நிச்சயதார்த்த விழா",
+            inviteTitle: "திருமண நிச்சயதார்த்த விழா அழைப்பிதழ்",
+            inviteMsg: "அன்புடையீர்! வணக்கம்.<br/><br/>ஸ்ரீ முருகப்பெருமான் திருவருள் துணைக்கொண்டு நிகழும் சுபமங்களம் பராபவ வருடம் ஆனி மாதம் 25-ஆம் நாள் (09-07-2026) வியாழக்கிழமை கிருஷ்ண பக்ஷம், தசமி திதி, அஸ்வினி நட்சத்திரம், சித்தயோகம் கூடிய சுபதினத்தில் காலை 10.30 மணிக்குமேல் 12.00 மணிக்குள்ளாக கன்னியா லக்கினத்தில் திருமண நிச்சயதார்த்தம் செய்ய பெரியோர்களால் நிச்சயித்தவண்ணம் விழா நடைபெற உள்ளது. தாங்கள் தங்கள் சுற்றமும் நட்பும் சூழ வருகை தந்து விழாவினை சிறப்பிக்குமாறு அன்புடன் அழைக்கின்றோம்.",
+            quote: "\"இரு மனங்கள் இணைந்து ஒரு மனதாக மாறும் இனிய தருணம்.\"",
+            eventDetails: "விழா விவரங்கள்",
+            dateTitle: "தேதி", date1: "வியாழக்கிழமை", date2: "09 ஜூலை 2026", date3: "ஆனி 25, பராபவ வருடம்",
+            timeTitle: "நேரம்", time1: "காலை 10:30", time2: "முதல் 12:00 வரை", time3: "முகூர்த்தம்",
+            venueTitle: "இடம்", venue1: "A.S.R. பங்ஷன் ஹால் A/c", venue2: "பொன்னியம்மன் கோவில் தெரு,", venue3: "சாய்நாதபுரம், வேலூர்.",
+            timelineTitle: "நிகழ்ச்சி நிரல்",
+            tl1Title: "வரவேற்பு", tl1Time: "காலை 09:30", tl1Desc: "உறவினர்கள் மற்றும் நண்பர்கள் வருகை.",
+            tl2Title: "நிச்சயதார்த்தம்", tl2Time: "காலை 10:30 - 12:00", tl2Desc: "மோதிரம் மாற்றுதல் மற்றும் பெரியோர்களின் ஆசி பெறுதல்.",
+            tl3Title: "அறுசுவை விருந்து", tl3Time: "மதியம் 12:30 முதல்", tl3Desc: "விழாவை சிறப்பிக்க சுவையான மதிய விருந்து.",
+            locTitle: "மண்டபம் அமைவிடம்", locDesc: "A.S.R. பங்ஷன் ஹால் A/c, சாய்நாதபுரம், வேலூர்", locBtn: "வரைபடத்தில் பார்க்க",
+            footerWelcome: "தங்கள் நல்வரவை அன்புடன் எதிர்நோக்கும்", footerMade: "அன்புடன்"
+          },
+          et: { 
+            godsNameBride: "ஸ்ரீ அங்காளம்மன் துணை | ஸ்ரீ முருகன் துணை",
+            godsNameGroom: "ஸ்ரீ மோளியம்மன் துணை | ஸ்ரீ முருகன் துணை",
+            ceremony: "Engagement Ceremony",
+            inviteTitle: "திருமண நிச்சயதார்த்த விழா அழைப்பிதழ்",
+            inviteMsg: "அன்புடையீர்! வணக்கம்.<br/><br/>ஸ்ரீ முருகப்பெருமான் திருவருள் துணைக்கொண்டு நிகழும் சுபமங்களம் பராபவ வருடம் ஆனி மாதம் 25-ஆம் நாள் (09-07-2026) வியாழக்கிழமை கிருஷ்ண பக்ஷம், தசமி திதி, அஸ்வினி நட்சத்திரம், சித்தயோகம் கூடிய சுபதினத்தில் காலை 10.30 மணிக்குமேல் 12.00 மணிக்குள்ளாக கன்னியா லக்கினத்தில் திருமண நிச்சயதார்த்தம் செய்ய பெரியோர்களால் நிச்சயித்தவண்ணம் விழா நடைபெற உள்ளது. தாங்கள் தங்கள் சுற்றமும் நட்பும் சூழ வருகை தந்து விழாவினை சிறப்பிக்குமாறு அன்புடன் அழைக்கின்றோம்.",
+            quote: "\"Two souls with but a single thought, two hearts that beat as one.\"",
+            eventDetails: "Event Details",
+            dateTitle: "The Date", date1: "Thursday", date2: "09 July 2026", date3: "ஆனி 25, பராபவ வருடம்",
+            timeTitle: "The Time", time1: "10:30 AM", time2: "to 12:00 PM", time3: "Muhurtham",
+            venueTitle: "The Venue", venue1: "A.S.R. Function Hall A/c", venue2: "Ponniamman Koil Street,", venue3: "Sainathapuram, Vellore.",
+            timelineTitle: "Event Timeline",
+            tl1Title: "Welcome & Gathering", tl1Time: "09:30 AM", tl1Desc: "Join us as we welcome our friends and family.",
+            tl2Title: "Engagement Ceremony", tl2Time: "10:30 AM - 12:00 PM", tl2Desc: "The official ring exchange and blessings.",
+            tl3Title: "Celebratory Feast", tl3Time: "12:30 PM Onwards", tl3Desc: "Please join us for a delicious traditional lunch following the ceremony.",
+            locTitle: "Venue Location", locDesc: "A.S.R. Function Hall A/c, Sainathapuram, Vellore", locBtn: "Get Directions on Map",
+            footerWelcome: "தங்கள் நல்வரவை அன்புடன் எதிர்நோக்கும்", footerMade: "Made with love for"
+          }
+        };
+
+        const profilesData = {
+          bride: {
+            initial: "H", color: "rose",
+            en: { nameTitle: "B. Haritha", edu: "M.Sc., (Data Science)", desc: "Team Lead, OTOMATIKS, Katpadi, Vellore", nameScript: "Haritha", grandparents: ["Granddaughter of Late P.S. Jegatheesan Mudaliar & J. Radhabai Ammal", "Granddaughter of Late M. Ponnusamy Mudaliar & P. Kasthuri Ammal"], relation: "Daughter of", parents: "Mr. J. Boopathy & Mrs. Rajeswari Boopathy", address: "Anna Nagar, Vellore" },
+            ta: { nameTitle: "B. ஹரிதா", edu: "M.Sc., (Datascience)", desc: "Team Lead, OTOMATIKS, Katpadi, Vellore", nameScript: "Haritha", grandparents: ["நினைவில் வாழும் P.S. ஜெகதீசன் முதலியார் - J. இராதாபாய் அம்மாள் பேத்தியும்", "நினைவில் வாழும் M. பொன்னுசாமி முதலியார் - P. கஸ்தூரி அம்மாள் பேத்தியும்"], relation: "அவர்களின் அன்பு மகள்", parents: "திரு. J. பூபதி - திருமதி. இராஜேஸ்வரி பூபதி", address: "அண்ணா நகர், வேலூர்" },
+            et: { nameTitle: "B. ஹரிதா", edu: "M.Sc., (Datascience)", desc: "Team Lead, OTOMATIKS, Katpadi, Vellore", nameScript: "Haritha", grandparents: ["Granddaughter of Late P.S. Jegatheesan Mudaliar & J. Radhabai Ammal", "Granddaughter of Late M. Ponnusamy Mudaliar & P. Kasthuri Ammal"], relation: "Daughter of", parents: "Mr. J. Boopathy & Mrs. Rajeswari Boopathy", address: "Anna Nagar, Vellore" }
+          },
+          groom: {
+            initial: "U", color: "amber",
+            en: { nameTitle: "M. Umeshraj", edu: "B.E., (Civil Engineer)", desc: "B.U. Builders & Constructions, Vellore", nameScript: "Umeshraj", grandparents: ["Grandson of Late M. Arumugam Mudaliar & A. Sakunthala Ammal", "Grandson of Late K. Kanniyappan Mudaliar & K. Padmavathi Ammal"], relation: "Son of", parents: "Mr. A. Mahendiran & Mrs. Anjali Mahendiran", address: "Ezhil Nagar, Vellore" },
+            ta: { nameTitle: "M. உமேஷ்ராஜ்", edu: "B.E., (Civil Engineer)", desc: "B.U. Builders & Constructions, Vellore", nameScript: "Umeshraj", grandparents: ["நினைவில் வாழும் M. ஆறுமுகம் முதலியார் - A. சகுந்தலா அம்மாள் பேரனும்", "நினைவில் வாழும் K. கன்னியப்பன் முதலியார் - K. பத்மாவதி அம்மாள் பேரனும்"], relation: "அவர்களின் அன்பு மகன்", parents: "திரு. A. மகேந்திரன் - திருமதி. அஞ்சலி மகேந்திரன்", address: "எழில் நகர், வேலூர்" },
+            et: { nameTitle: "M. உமேஷ்ராஜ்", edu: "B.E., (Civil Engineer)", desc: "B.U. Builders & Constructions, Vellore", nameScript: "Umeshraj", grandparents: ["Grandson of Late M. Arumugam Mudaliar & A. Sakunthala Ammal", "Grandson of Late K. Kanniyappan Mudaliar & K. Padmavathi Ammal"], relation: "Son of", parents: "Mr. A. Mahendiran & Mrs. Anjali Mahendiran", address: "Ezhil Nagar, Vellore" }
+          }
+        };
+
+        const footerData = {
+          bride: {
+            en: `<p class="text-lg font-medium text-white">J. Boopathy & Mrs. Rajeswari Boopathy</p><p>Radha Printers & Binders,</p><p>Haritha Stationery & Xerox,</p><p>Anna Nagar, Vellore.</p><p class="mt-4 inline-flex items-center gap-2 bg-rose-900 px-4 py-2 rounded-full border border-rose-800 text-sm text-white">Cell: +91 98942 64325</p>`,
+            ta: `<p class="text-lg font-medium text-white">J. பூபதி - திருமதி. இராஜேஸ்வரி பூபதி</p><p>இராதா பிரிண்டர்ஸ் & பைண்டர்ஸ்,</p><p>ஹரிதா ஸ்டேஷனரி & ஜெராக்ஸ்,</p><p>அண்ணா நகர், வேலூர்.</p><p class="mt-4 inline-flex items-center gap-2 bg-rose-900 px-4 py-2 rounded-full border border-rose-800 text-sm text-white">செல்: +91 98942 64325</p>`,
+            et: `<p class="text-lg font-medium text-white">J. பூபதி - திருமதி. இராஜேஸ்வரி பூபதி</p><p>இராதா பிரிண்டர்ஸ் & பைண்டர்ஸ்,</p><p>ஹரிதா ஸ்டேஷனரி & ஜெராக்ஸ்,</p><p>அண்ணா நகர், வேலூர்.</p><p class="mt-4 inline-flex items-center gap-2 bg-rose-900 px-4 py-2 rounded-full border border-rose-800 text-sm text-white">Cell: +91 98942 64325</p>`
+          },
+          groom: {
+            en: `<p class="text-lg font-medium text-white">A. Mahendiran & Mrs. Anjali Mahendiran</p><p>Ezhil Nagar, Vellore.</p><p class="mt-4 inline-flex items-center gap-2 bg-rose-900 px-4 py-2 rounded-full border border-rose-800 text-sm text-white">Cell: +91 98947 58586</p>`,
+            ta: `<p class="text-lg font-medium text-white">A. மகேந்திரன் - திருமதி. அஞ்சலி மகேந்திரன்</p><p>எழில் நகர், வேலூர்.</p><p class="mt-4 inline-flex items-center gap-2 bg-rose-900 px-4 py-2 rounded-full border border-rose-800 text-sm text-white">செல்: +91 98947 58586</p>`,
+            et: `<p class="text-lg font-medium text-white">A. மகேந்திரன் - திருமதி. அஞ்சலி மகேந்திரன்</p><p>எழில் நகர், வேலூர்.</p><p class="mt-4 inline-flex items-center gap-2 bg-rose-900 px-4 py-2 rounded-full border border-rose-800 text-sm text-white">Cell: +91 98947 58586</p>`
+          }
+        };
+
+        // --- 2. URL Parsing & DOM Injection ---
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const side = urlParams.get('side') === 'bride' ? 'bride' : 'groom';
+        const langParam = urlParams.get('lang');
+        const lang = ['en', 'ta', 'et'].includes(langParam) ? langParam : 'et';
+        
+        const activeI18n = i18n[lang];
+
+        // Header & Texts
+        document.getElementById('hero-gods-name').innerText = side === 'bride' ? activeI18n.godsNameBride : activeI18n.godsNameGroom;
+        document.getElementById('hero-ceremony').innerText = activeI18n.ceremony;
+        document.getElementById('invite-title').innerText = activeI18n.inviteTitle;
+        document.getElementById('invite-msg').innerHTML = activeI18n.inviteMsg;
+        document.getElementById('invite-quote').innerText = activeI18n.quote;
+        
+        // Event Details
+        document.getElementById('event-title').innerText = activeI18n.eventDetails;
+        document.getElementById('date-title').innerText = activeI18n.dateTitle;
+        document.getElementById('date-1').innerText = activeI18n.date1;
+        document.getElementById('date-2').innerText = activeI18n.date2;
+        document.getElementById('date-3').innerText = activeI18n.date3;
+        
+        document.getElementById('time-title').innerText = activeI18n.timeTitle;
+        document.getElementById('time-1').innerText = activeI18n.time1;
+        document.getElementById('time-2').innerText = activeI18n.time2;
+        document.getElementById('time-3').innerText = activeI18n.time3;
+        
+        document.getElementById('venue-title').innerText = activeI18n.venueTitle;
+        document.getElementById('venue-1').innerText = activeI18n.venue1;
+        document.getElementById('venue-2').innerText = activeI18n.venue2;
+        document.getElementById('venue-3').innerText = activeI18n.venue3;
+        
+        // Timeline
+        document.getElementById('timeline-title').innerText = activeI18n.timelineTitle;
+        document.getElementById('tl1-title').innerText = activeI18n.tl1Title;
+        document.getElementById('tl1-time').innerText = activeI18n.tl1Time;
+        document.getElementById('tl1-desc').innerText = activeI18n.tl1Desc;
+        document.getElementById('tl2-title').innerText = activeI18n.tl2Title;
+        document.getElementById('tl2-time').innerText = activeI18n.tl2Time;
+        document.getElementById('tl2-desc').innerText = activeI18n.tl2Desc;
+        document.getElementById('tl3-title').innerText = activeI18n.tl3Title;
+        document.getElementById('tl3-time').innerText = activeI18n.tl3Time;
+        document.getElementById('tl3-desc').innerText = activeI18n.tl3Desc;
+        
+        // Location
+        document.getElementById('loc-title').innerText = activeI18n.locTitle;
+        document.getElementById('loc-desc').innerText = activeI18n.locDesc;
+        document.getElementById('loc-btn').innerText = activeI18n.locBtn;
+        
+        // Footer
+        document.getElementById('footer-welcome').innerText = activeI18n.footerWelcome;
+        document.getElementById('footer-made').innerText = activeI18n.footerMade;
+        document.getElementById('footer-hosts-container').innerHTML = footerData[side][lang];
+
+        // Profile Loading
+        const profileOrder = side === 'bride' ? ['bride', 'groom'] : ['groom', 'bride'];
+        
+        // Setup Hero Names
+        document.getElementById('hero-name-1').innerText = profilesData[profileOrder[0]][lang].nameScript;
+        document.getElementById('hero-name-2').innerText = profilesData[profileOrder[1]][lang].nameScript;
+        document.getElementById('footer-names').innerText = `${profilesData[profileOrder[0]][lang].nameScript} & ${profilesData[profileOrder[1]][lang].nameScript}`;
+
+        const profilesContainer = document.getElementById('profiles-container');
+        const centerDividerHtml = `
+            <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full items-center justify-center shadow-xl border border-rose-100 z-10">
+              <i data-lucide="heart" width="24" height="24" class="text-rose-600" fill="currentColor"></i>
+            </div>
+        `;
+
+        const profilesHtml = profileOrder.map((profKey, index) => {
+            const pData = profilesData[profKey];
+            const pLang = pData[lang];
+            const isRose = pData.color === 'rose';
+            
+            const gradientColors = isRose ? 'from-rose-400 to-rose-600' : 'from-yellow-400 to-yellow-600';
+            const bgLight = isRose ? 'bg-rose-100' : 'bg-amber-100';
+            const bgMedium = isRose ? 'bg-rose-200' : 'bg-amber-200';
+            const textMedium = isRose ? 'text-rose-600' : 'text-amber-600';
+            const textInitial = isRose ? 'text-rose-500' : 'text-amber-600';
+            
+            const directionClass = index === 0 ? 'reveal-right' : 'reveal-left';
+            const delay = index === 0 ? '0ms' : '200ms';
+
+            return `
+                <div class="reveal ${directionClass}" style="transition-delay: ${delay};">
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-rose-100 text-center relative overflow-hidden group hover:shadow-xl transition-shadow h-full">
+                        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${gradientColors}"></div>
+                        <div class="w-32 h-32 mx-auto ${bgLight} rounded-full mb-6 flex items-center justify-center border-4 border-white shadow-md overflow-hidden relative">
+                           <div class="absolute inset-0 flex items-center justify-center ${bgMedium} ${textInitial} font-serif text-4xl">${pData.initial}</div>
+                        </div>
+                        <h3 class="text-2xl font-serif text-rose-900 mb-2 font-bold">${pLang.nameTitle} <span class="text-sm font-normal text-gray-500 ml-1">${pLang.edu}</span></h3>
+                        <h4 class="text-xl font-cursive ${textMedium} mb-4">${pLang.nameScript}</h4>
+                        <p class="text-sm text-gray-600 mb-1 font-medium">${pLang.desc}</p>
+                        <div class="w-12 h-[1px] bg-rose-200 mx-auto my-4"></div>
+                        <div class="text-sm text-gray-500 space-y-1">
+                          ${pLang.grandparents.map(gp => `<p>${gp}</p>`).join('')}
+                          <p class="text-rose-800 font-medium mt-2">${pLang.relation}</p>
+                          <p class="font-semibold text-gray-800">${pLang.parents}</p>
+                          <p>${pLang.address}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        profilesContainer.innerHTML = centerDividerHtml + profilesHtml;
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // --- 3. UI Interactions ---
+
+        // Scroll Reveal Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Confetti
+        function startConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#FFD700', '#FF8C00', '#FF1493', '#00BFFF', '#32CD32'];
+            
+            for(let i = 0; i < 50; i++) {
+                const piece = document.createElement('div');
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                piece.className = 'absolute top-[-10px] w-3 h-3 rounded-sm opacity-80 animate-confetti';
+                piece.style.left = `${Math.random() * 100}%`;
+                piece.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                piece.style.animationDelay = `${Math.random() * 2}s`;
+                piece.style.backgroundColor = randomColor;
+                piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                container.appendChild(piece);
+            }
+            setTimeout(() => { container.innerHTML = ''; }, 5000);
+        }
+        startConfetti();
+    });
+
+    // --- 4. Auto Scroll System ---
+    let isAutoScrolling = false;
+    let scrollReq;
+
+    function autoScrollLoop() {
+        if(isAutoScrolling) {
+            window.scrollBy({ top: 1, left: 0, behavior: 'instant' });
+            scrollReq = requestAnimationFrame(autoScrollLoop);
+        }
+    }
+
+    window.toggleAutoScroll = function() {
+        const btnText = document.getElementById('auto-scroll-text');
+        const btnIcon = document.getElementById('auto-scroll-icon');
+        
+        isAutoScrolling = !isAutoScrolling;
+        
+        if(isAutoScrolling) {
+            btnText.innerText = 'Pause Scroll';
+            btnIcon.setAttribute('data-lucide', 'pause-circle');
+            lucide.createIcons();
+            autoScrollLoop();
+        } else {
+            btnText.innerText = 'Auto Scroll';
+            btnIcon.setAttribute('data-lucide', 'play-circle');
+            lucide.createIcons();
+            cancelAnimationFrame(scrollReq);
+        }
+    }
+
+    // Pause scroll on user interaction
+    const stopScroll = () => {
+        if(isAutoScrolling) {
+            window.toggleAutoScroll();
+        }
+    };
+    window.addEventListener('touchstart', stopScroll, {passive: true});
+    window.addEventListener('wheel', stopScroll, {passive: true});
+  </script>
+</body>
+</html>
